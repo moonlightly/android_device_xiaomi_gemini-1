@@ -15,6 +15,10 @@
 #
 
 BOARD_VENDOR := xiaomi
+
+# ReleaseTools
+TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/gemini/releasetools
+
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/gemini/include
 
