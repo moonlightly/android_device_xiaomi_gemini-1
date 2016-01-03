@@ -105,6 +105,8 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -428,6 +430,7 @@ service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     oneshot
 
 on property:vold.decrypt=trigger_restart_framework
+    start config_bt_addr
     start qcom-c_main-sh
 
 on property:persist.env.fastdorm.enabled=true
@@ -444,6 +447,12 @@ service dpmd /system/bin/dpmd
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class core
     user root
+    oneshot
+
+service config_bt_addr /system/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
     oneshot
 
 service rmt_storage /system/bin/rmt_storage
