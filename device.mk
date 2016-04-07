@@ -260,6 +260,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/scripts/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     device/xiaomi/gemini/scripts/init.crda.sh:system/etc/init.crda.sh \
+    device/xiaomi/gemini/scripts/init.leds.sh:system/etc/init.leds.sh \
     device/xiaomi/gemini/scripts/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     device/xiaomi/gemini/scripts/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/xiaomi/gemini/scripts/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \

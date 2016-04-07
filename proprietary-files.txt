@@ -132,11 +132,7 @@ etc/firmware/rampatch_tlv_3.2.tlv
 etc/firmware/tfa9891.cnt
 etc/firmware/tfa98xx.cnt
 etc/gps_diag.cfg
-etc/init.leds.sh
-etc/libnfc-brcm.conf
-etc/libnfc-nxp.conf
 etc/modem/Diag.cfg
-etc/nfcee_access.xml
 etc/permissions/dpmapi.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
@@ -158,7 +154,6 @@ etc/usf/proximity/cfg_mtp/usf_proximity_mtp_rx_transparent_data.bin
 etc/usf/proximity/cfg_mtp/usf_proximity_mtp_tx_transparent_data.bin
 etc/usf/proximity/cfg_mtp/usf_ranging_apps_mtp.cfg
 etc/usf/proximity/cfg_mtp/usf_ranging_mtp_algo_transparent_data.bin
-etc/usf_settings.sh
 lib/hw/camera.msm8996.so
 lib/hw/consumerir.msm8996.so
 lib/hw/fingerprint.fpc.so
