@@ -1,17 +1,20 @@
 #
 # system.prop for gemini
 #
-
 persist.audio.camera.vol.fixed = 1
 persist.audio.music.volume =5
 persist.camera.capture.animate=0
 persist.camera.preview.size=3
 persist.camera.qcom.misc=1
+persist.camera.stats.test=5
 persist.camera.tintless=disable
 persist.camera.tn.disable=1
 persist.data.iwlan.enable = true
+persist.http.gba.auth false
 persist.hwc.dynamicfps=48
 persist.loc.nlp_name=com.qualcomm.location
+persist.logd.prunelist "1000 1013"
+persist.logd.size.radio "4M"
 persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 persist.power.useautobrightadj=true
 persist.radio.apm_sim_not_pwdn=1
@@ -52,6 +55,7 @@ ro.adb.qemud=1
 ro.ril.gprsclass=10
 ro.ril.hsxpa=1
 ro.vendor.extension_library=libqti-perfd-client.so
+wifi.interface=wlan0
 
 #
 # system.prop for msm8996
