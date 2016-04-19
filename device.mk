@@ -263,29 +263,20 @@ PRODUCT_PACKAGES += \
     init.crda.sh \
     init.leds.sh \
     init.mdm.sh \
-    init.qcom.audio.sh \
     init.qcom.bt.sh \
-    init.qcom.class_core.sh \
     init.qcom.coex.sh \
     init.qcom.debug.sh \
     init.qcom.early_boot.sh \
-    init.qcom.efs.sync.sh \
-    init.qcom.factory.rc \
     init.qcom.fm.sh \
     init.qcom.post_boot.sh \
     init.qcom.rc \
     init.qcom.sdio.sh \
     init.qcom.sensors.sh \
     init.qcom.sh \
-    init.qcom.syspart_fixup.sh \
-    init.qcom.uicc.sh \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
-    init.qcom.wifi.sh \
-    init.qcom.zram.sh \
     init.recovery.hardware.rc \
     init.target.rc \
-    qca6234-service.sh \
     ueventd.qcom.rc \
     usf_post_boot.sh \
     usf_settings.sh
