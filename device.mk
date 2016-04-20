@@ -192,6 +192,7 @@ PRODUCT_PACKAGES += \
     libomx_m4vdec_sharedlibrary \
     libomx_mp3dec_sharedlibrary \
     libomx_sharedlibrary \
+    libmm-omxcore \
     libstagefrighthw \
     qcmediaplayer
 
@@ -335,9 +336,9 @@ PRODUCT_PACKAGES += \
     curl \
     libnl_2 \
     libbson \
-    libcnefeatureconfig \
     libtinyxml \
-    libxml2
+    libxml2 \
+    librmnetctl
 
 # Misc properties
 PRODUCT_PROPERTY_OVERRIDES += \
