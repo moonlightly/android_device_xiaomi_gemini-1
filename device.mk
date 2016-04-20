@@ -16,6 +16,7 @@
 
 # Inherit proprietary blobs
 $(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor-blobs.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/gemini/overlay
@@ -27,6 +28,10 @@ PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
+
+# Kernel
+PRODUCT_COPY_FILES := \
+    device/xiaomi/gemini/kernel-dtb:kernel
 
 $(call inherit-product-if-exists, build/target/product/verity.mk)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
@@ -102,7 +107,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
-    device/xiaomi/gemini/audio/audio_effects.conf:system/etc/audio_effects.conf \
     device/xiaomi/gemini/audio/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
     device/xiaomi/gemini/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/xiaomi/gemini/audio/audio_policy.conf:system/etc/audio_policy.conf \
@@ -113,13 +117,6 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/audio/sound_trigger_mixer_paths_wcd9330.xml:system/etc/sound_trigger_mixer_paths_wcd9330.xml \
     device/xiaomi/gemini/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
     device/xiaomi/gemini/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    device/xiaomi/gemini/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh \
-    device/xiaomi/gemini/configs/usf_settings.sh:system/etc/usf_settings.sh
-
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    device/xiaomi/gemini/configs/hcidump.sh:system/etc/hcidump.sh \
-    device/xiaomi/gemini/configs/hsic.control.bt.sh:system/etc/hsic.control.bt.sh
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -253,24 +250,53 @@ PRODUCT_PACKAGES += \
 
 # Qualcomm Configs
 PRODUCT_COPY_FILES += \
-    device/xiaomi/gemini/configs/qca6234-service.sh:system/etc/qca6234-service.sh \
     device/xiaomi/gemini/configs/calib.cfg:system/etc/calib.cfg
 
-# Scripts
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    hcidump.sh \
+    hsic.control.bt.sh \
+    init.ath3k.bt.sh \
+    init.class_main.sh \
+    init.crda.sh \
+    init.leds.sh \
+    init.mdm.sh \
+    init.qcom.audio.sh \
+    init.qcom.bt.sh \
+    init.qcom.class_core.sh \
+    init.qcom.coex.sh \
+    init.qcom.debug.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.efs.sync.sh \
+    init.qcom.factory.rc \
+    init.qcom.fm.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.rc \
+    init.qcom.sdio.sh \
+    init.qcom.sensors.sh \
+    init.qcom.sh \
+    init.qcom.syspart_fixup.sh \
+    init.qcom.uicc.sh \
+    init.qcom.usb.rc \
+    init.qcom.usb.sh \
+    init.qcom.wifi.sh \
+    init.qcom.zram.sh \
+    init.recovery.hardware.rc \
+    init.target.rc \
+    qca6234-service.sh \
+    ueventd.qcom.rc \
+    usf_post_boot.sh \
+    usf_settings.sh
+
 PRODUCT_COPY_FILES += \
-    device/xiaomi/gemini/scripts/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
-    device/xiaomi/gemini/scripts/init.crda.sh:system/etc/init.crda.sh \
-    device/xiaomi/gemini/scripts/init.leds.sh:system/etc/init.leds.sh \
-    device/xiaomi/gemini/scripts/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
-    device/xiaomi/gemini/scripts/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    device/xiaomi/gemini/scripts/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    device/xiaomi/gemini/scripts/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
-    device/xiaomi/gemini/scripts/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    device/xiaomi/gemini/scripts/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/xiaomi/gemini/scripts/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
-    device/xiaomi/gemini/scripts/init.qcom.uicc.sh:system/etc/init.qcom.uicc.sh \
-    device/xiaomi/gemini/scripts/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
-    device/xiaomi/gemini/scripts/init.qcom.zram.sh:system/etc/init.qcom.zram.sh
+    device/xiaomi/gemini/rootdir/root/sbin/chargeonlymode:root/sbin/chargeonlymode \
+    device/xiaomi/gemini/rootdir/root/sbin/e2image_blocks:root/sbin/e2image_blocks \
+    device/xiaomi/gemini/rootdir/root/sbin/filefrag_blocks:root/sbin/filefrag_blocks \
+    device/xiaomi/gemini/rootdir/root/sbin/mdtp_fota:root/sbin/mdtp_fota
+
+PRODUCT_COPY_FILES += \
+    device/xiaomi/gemini/configs/boot_fixup:system/etc/boot_fixup
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -330,3 +356,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1
+
+# adb hackery
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.secure=1 \
+    ro.allow.mock.location=0 \
+    ro.debuggable=1 \
+    ro.adb.secure=0 \
+    persist.sys.usb.config=mtp,adb
+
+# init hacks
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.hardware=qcom \
+    ro.boot.bootdevice=624000.ufshc \
+    ro.hardware.keystore=msm8996
