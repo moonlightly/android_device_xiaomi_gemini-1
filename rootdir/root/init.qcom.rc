@@ -90,10 +90,8 @@ on boot
     chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/spi_regsize
 
 
-    chown system system /sys/module/radio_iris_transport/parameters/fmsmd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
 
-    chmod 0660 /sys/module/radio_iris_transport/parameters/fmsmd_set
     chmod 0660 /sys/class/rfkill/rfkill0/state
 
     chown bluetooth net_bt /dev/ttyHS0
@@ -128,37 +126,15 @@ on boot
     chown system system /sys/class/leds/blue/blink
 
     setprop wifi.interface wlan0
-
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
-
-
     setprop ro.telephony.call_ring.multiple false
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
-
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.default 4096,87380,524288,4096,16384,110208
-    setprop net.tcp.buffersize.lte     2097152,4194304,8388608,262144,524288,1048576
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsupa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsdpa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hspap   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.evdo    4094,87380,524288,4096,16384,262144
-
-    setprop net.tcp.2g_init_rwnd 10
 
 #   Assign TCP buffer thresholds to be ceiling value of technology maximums
 #   Increased technology maximums should be reflected here.
@@ -313,10 +289,6 @@ on post-fs-data
 
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
-
-    #Create FM dir for patchdownloader
-    mkdir /data/misc/fm 0770 system system
-    chmod 0770 /data/misc/fm
 
     # RIDL data
     mkdir /data/misc/SelfHost/ 0710 system shell
@@ -727,13 +699,6 @@ service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw qcom_diag net_admin wifi
-
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user system
-    group system
-    disabled
-    oneshot
 
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
