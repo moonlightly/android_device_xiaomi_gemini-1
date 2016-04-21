@@ -25,9 +25,9 @@ $(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor-blobs.mk)
 # Inherit from ferrari device
 $(call inherit-product, device/xiaomi/gemini/device.mk)
 
-# Device identifier. This must come after all inclusions
+# Set those variables here to overwrite the inherited values.
 PRODUCT_DEVICE := gemini
 PRODUCT_NAME := full_gemini
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi5
+PRODUCT_MODEL := MI 5
 PRODUCT_MANUFACTURER := Xiaomi

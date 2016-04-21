@@ -22,12 +22,10 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Enhanced NFC
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := gemini
 PRODUCT_NAME := cm_gemini
-PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi5
-PRODUCT_MANUFACTURER := Xiaomi
+BOARD_VENDOR := Xiaomi
+TARGET_VENDOR := Xiaomi
+PRODUCT_DEVICE := gemini
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
