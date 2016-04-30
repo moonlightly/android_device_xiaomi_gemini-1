@@ -18,3 +18,8 @@ def FullOTA_PostValidate(info):
     info.script.AppendExtra('run_program("/sbin/e2fsck", "-fy", "/dev/block/bootdevice/by-name/system");');
     info.script.AppendExtra('run_program("/tmp/install/bin/resize2fs_static", "/dev/block/bootdevice/by-name/system");');
     info.script.AppendExtra('run_program("/sbin/e2fsck", "-fy", "/dev/block/bootdevice/by-name/system");');
+
+def FullOTA_InstallEnd(info):
+    info.script.Mount("/system");
+    info.script.AppendExtra('run_program("/sbin/chmod", "-R", "777", "/system/bin/*");');
+    info.script.Unmount("/system");
