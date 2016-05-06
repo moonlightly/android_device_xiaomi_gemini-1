@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-# Inherit proprietary blobs
-$(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor.mk)
-$(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor-blobs.mk)
-
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/gemini/overlay
 
@@ -34,12 +30,8 @@ PRODUCT_COPY_FILES := \
     device/xiaomi/gemini/kernel-dtb:kernel
 
 $(call inherit-product-if-exists, build/target/product/verity.mk)
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-
-# Art
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-swap=false
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
 
 # Permissions
 PRODUCT_COPY_FILES := \
@@ -85,7 +77,8 @@ PRODUCT_COPY_FILES := \
 PRODUCT_PACKAGES += \
     AntHalService \
     libantradio \
-    antradio_app
+    antradio_app \
+    libvolumelistener
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -94,6 +87,7 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8996 \
     audio.r_submix.default \
     audio.usb.default \
+    audio_amplifier.msm8996 \
     audio_policy.msm8996 \
     tinymix
 
@@ -101,8 +95,7 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libvolumelistener
+    libqcomvoiceprocessing
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
@@ -130,11 +123,16 @@ PRODUCT_PACKAGES += \
     hdmi_cec.msm8996 \
     liboverlay
 
-# Filesystem tools
+# Filesystem management tools
 PRODUCT_PACKAGES += \
-    e2fsck \
     make_ext4fs \
-    setup_fs
+    setup_fs \
+    mkntfs \
+    dumpe2fs \
+    resize2fs \
+    e2fsck_static \
+    mke2fs_static \
+    resize2fs_static
 
 # FingerPrint
 PRODUCT_PACKAGES += \
@@ -157,6 +155,11 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     device/xiaomi/gemini/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl
 
+# IPACM
+PRODUCT_PACKAGES += \
+    IPACM_cfg.xml \
+    ipacm
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
@@ -170,22 +173,41 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8996
 
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8996
+
 # Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libdashplayer \
     libOmxAacEnc \
+    libOmxAc3HwDec \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
+    libOmxMp3Dec \
     libOmxQcelp13Enc \
+    libOmxSwVdec \
+    libOmxSwVencMpeg4 \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVdpp \
     libOmxVenc \
     libOmxVidEnc \
-    libmm-omxcore \
+    libomx_aacdec_sharedlibrary \
+    libomx_amr_component_lib \
+    libomx_amrdec_sharedlibrary \
+    libomx_amrenc_sharedlibrary \
+    libomx_avcdec_sharedlibrary \
+    libomx_m4vdec_sharedlibrary \
+    libomx_mp3dec_sharedlibrary \
+    libomx_sharedlibrary \
     libstagefrighthw \
-    qcmediaplayer
+    qcmediaplayer \
+    libmm-omxcore \
+    libqdMetaData
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/configs/media_codecs.xml:system/etc/media_codecs.xml \
@@ -204,7 +226,9 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
     nfc_nci.pn54x.default \
-    Tag
+    Tag \
+    libnfc-nci \
+    libnfc_nci_jni
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
@@ -256,6 +280,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/xiaomi/gemini/configs/boot_fixup:system/etc/boot_fixup
 
+# RIL
+PRODUCT_PACKAGES += \
+    librmnetctl
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8996
@@ -287,11 +315,14 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes \
     curl \
+    libcurl \
     libnl_2 \
     libbson \
     libtinyxml \
     libxml2 \
-    librmnetctl
+    librmnetctl \
+    libcnefeatureconfig \
+    libdrmclearkeyplugin
 
 # Misc properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -313,7 +344,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # adb hackery
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.secure=1 \
+    ro.secure=0 \
     ro.allow.mock.location=0 \
     ro.debuggable=1 \
     ro.adb.secure=0 \
