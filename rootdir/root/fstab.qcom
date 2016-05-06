@@ -19,4 +19,4 @@
 /dev/block/bootdevice/by-name/rpm          /rpm            emmc    defaults                                                        defaults
 /dev/block/bootdevice/by-name/aboot        /aboot          emmc    defaults                                                        defaults
 
-/devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd.0.auto/usb1*  /storage/usbotg    vfat    nosuid,nodev                wait,voldmanaged=usbotg:auto
+#/devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd.0.auto/usb1*  /storage/usbotg    vfat    nosuid,nodev                wait,voldmanaged=usbotg:auto
