@@ -90,7 +90,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/xiaomi/gemini/rootdir/root/fstab.qcom
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # Audio
 AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
@@ -157,6 +156,7 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # NFC
 BOARD_NFC_CHIPSET := pn548
+BOARD_NFC_DEVICE := "/dev/pn548"
 
 # Offmode Charging
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
